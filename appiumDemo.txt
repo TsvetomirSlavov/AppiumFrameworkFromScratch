@@ -1,0 +1,40 @@
+import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by ceko on 08/27/2016.
+ */
+public class Runner {
+
+    public static void main(String[] args) throws MalformedURLException{
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("deviceName", "0715f7c98061163a");
+        caps.setCapability("platformName", "Android");
+        caps.setCapability("appPackage", "com.spacosa.android.famy.global");
+        caps.setCapability("appActivity", "com.spacosa.android.famy.global.IntroActivity");
+        AndroidDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723//wd/hub"), caps);
+        //driver.findElementByAndroidUIAutomator("new UiSelector.text(\"Apps\")").click();
+        //driver.findElementByAndroidUIAutomator("new UiSelector.text(\"Calendar\")").click();
+        caps.setCapability("autoAcceptAlerts", true);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+        WebElement pen = driver.findElement(By.id("com.spacosa.android.famy.global:id/btn_profile"));
+        pen.click();
+        WebElement nameField = driver.findElement(By.id("com.spacosa.android.famy.global:id/name"));
+        nameField.clear();
+        nameField.sendKeys("test1");
+
+        driver.quit();
+
+
+
+
+    }
+
+}
